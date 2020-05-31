@@ -22,9 +22,9 @@ MEDIA_DIR  = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nq643dl0q#9exx(xv9^b14=$5bmi05g-t^ic0m*c&^qcgakgv1'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '625868662401-9ouvsgur7dcka48rb3idv3snr154g436.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JcIemkkqcHOANxZ7W9HzPGRP'
+SECRET_KEY = os.environ.get('SOCIAL_MEDIA_SECRET_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'socialMediaDB',
         'USER': 'postgres',
-        'PASSWORD': 'Pur@200909',
+        'PASSWORD': os.environ.get('DB_POSTGRES_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

@@ -6,7 +6,7 @@ from openpyxl import load_workbook
 from django.utils import timezone
 from .models import *
 # Register your models here.
-def generate_stat(Modeladmin, request, queryset):
+def generate_excel(Modeladmin, request, queryset):
     filepath = os.path.join(settings.BASE_DIR,'data.xlsx')
     data = load_workbook(filepath)
     sheet = data.active
@@ -31,7 +31,7 @@ def generate_stat(Modeladmin, request, queryset):
 
 
 class DataAdmin(admin.ModelAdmin):
-    actions = [generate_stat,]
+    actions = [generate_excel,]
 
 admin.site.register(Profile,DataAdmin)
 

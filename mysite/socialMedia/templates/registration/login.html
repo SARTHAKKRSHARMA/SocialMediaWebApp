@@ -1,0 +1,29 @@
+{% extends 'header.html' %}
+{% block title_block %} Login Page {% endblock %}
+
+{% block body_block %}
+{% if not request.user.is_authenticated %}
+
+<div class="container">
+<h1>Login Form</h1>
+
+<form action="{% url 'socialMedia:user_login' %}" method="post">
+    {% csrf_token %}
+        {{form.as_p}}
+        <input type="hidden" name="next" value="{{next}}">
+        <button type="submit" class="btn btn-primary">Login</button> 
+</form>
+
+<p>
+   If you have forgotten your password.Click  <a href="{% url 'password_reset' %}">here</a>
+</p>
+
+<p>If want to login with your google account.Click <a href="{% url 'social:begin' 'google-oauth2' %}">here</a></p>
+<p class="font-weight-bold"> 
+    If not registered Click <a href="{% url 'socialMedia:register' %}" class="text-decoration-none">here</a>
+</p>
+</div>
+{% else %}
+<h1>You are already logged in</h1>
+{% endif %}
+{% endblock %}

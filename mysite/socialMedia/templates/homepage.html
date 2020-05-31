@@ -1,0 +1,39 @@
+{% extends 'header.html' %}
+
+{% block body_block %}
+<br>
+<form action="" method="POST">
+    <input type="text" name="user" placeholder="Search other user">
+    {% csrf_token %}
+    <button>Search</button>
+</form>
+<br>
+<h2>Most Liked Posts</h2>
+<ol>
+    {% for post in posts %}
+        <li><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post.title}}</a></li>
+    {% endfor %}
+</ol>
+
+
+<h2>Most Recent Posts</h2>
+<ol>
+    {% for post in newest_posts %}
+        <li><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post.title}}</a></li>
+    {% endfor %}
+</ol>
+
+<h2>Most Commented Post</h2>
+<ol>
+    {% for post in most_commented_posts %}
+        <li><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post.title}}</a></li>
+    {% endfor %}
+</ol>
+
+<h2>Most Disliked Post</h2>
+<ol>
+    {% for post in most_disliked_posts %}
+        <li><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post.title}}</a></li>
+    {% endfor %}
+</ol>
+{% endblock %}

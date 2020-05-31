@@ -1,0 +1,33 @@
+{% extends 'header.html' %}
+{% block body_block %}
+<h1>Title=>{{post.title}}</h1>
+<h3>Body=>{{post.body}}</h3>
+{% if post.picture %}
+    <img src="{{post.picture.url}}" alt="" height="270" width="580">
+{% endif %}
+<h4>Created By=> {{post.author.user.username}}</h4>
+{% if post.status == 'draft' %}
+<h4>Created On=>{{post.created}}</h4>
+{% else %}
+<h4>Published On=> {{post.publish}}</h4>
+{% endif %}
+
+<h3><a href="{% url 'socialMedia:like' id=post.id %}">Like</a>=> {{post.number_of_likes}}</h3> 
+<h3><a href="{% url 'socialMedia:dislike' id=post.id %}">Dislike</a>=> {{post.number_of_dislikes}}</h3>
+
+<h3>{{post.number_of_comments}} Comments</h3>
+<form action="" method="post">
+    <textarea name="comment" id="" cols="150" rows="4"></textarea>
+    <button>Add Comment</button>
+    {% csrf_token %}
+</form>
+
+<ol>
+    {% for comment in comments %}
+        <li>
+            <h3><strong>{{comment.comment}}</strong></h3>
+            Commented by {{comment.author}} on {{comment.created}}
+        </li>
+    {% endfor %}
+</ol>
+{% endblock %}

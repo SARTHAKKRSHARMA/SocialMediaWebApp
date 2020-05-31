@@ -1,0 +1,19 @@
+{% extends 'header.html' %}
+{% block body_block %}
+<h1>Here is the list of post you've created but haven't post</h1>
+
+<ol>
+    {% for post in posts %}
+        <li>
+            <h3><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post.title}}</a></h3>
+            <h4>{{post.body}}</h4>
+            <h6>Created On => {{post.created}}</h6>
+        </li>
+        <a href="{% url 'socialMedia:publish' id=post.id %}">Publish</a>
+        <a href="{% url 'socialMedia:update' id=post.id %}">Update</a>
+        <a href="{% url 'socialMedia:delete' id=post.id %}">Delete</a>
+    {% endfor %}
+</ol>
+
+<a href="{% url 'socialMedia:homepage' %}">Go Back</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'header.html' %}
+
+{% block body_block %}
+    {% if user == reqUser %}
+    <ol>
+        {% for post in posts%}  
+        <li><h3><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post}}</a></h3>
+            <ul>
+                <li>It was published on {{post.publish}}</li>
+                <li>This post has {{post.number_of_likes}} likes</li>
+                <li>This post has {{post.number_of_dislikes}} dislikes</li>
+                <li>This post has {{post.number_of_comments}} comments</li>
+            </ul>
+        </li>
+        {% endfor %}
+    {% else %}
+        {% if isNotFollower %}
+            <h1>You need to follow him in order to see his published posts. <a href="{% url 'socialMedia:follow' id=user.id %}">Click here</a> to follow him</h1>
+        {% endif %}
+        {% if isWantToBeFollower %}
+            <h1>You've already sent request.Now wait till he accepts your request</h1>
+        {% endif %}    
+        {% if isFollower %}
+            <h1>You can see his posts</h1>
+            <ol>
+            {% for post in posts%}  
+                <li><h3><a href="{% url 'socialMedia:complete_post' id=post.id %}">{{post}}</a></h3>
+                    <ul>
+                        <li>It was published on {{post.publish}}</li>
+                        <li>This post has {{post.number_of_likes}} likes</li>
+                        <li>This post has {{post.number_of_dislikes}} dislikes</li>
+                        <li>This post has {{post.number_of_comments}} comments</li>
+                    </ul>
+                </li> 
+            {% endfor %}
+            </ol>
+        {% endif %}
+    {% endif %}
+{% endblock %}

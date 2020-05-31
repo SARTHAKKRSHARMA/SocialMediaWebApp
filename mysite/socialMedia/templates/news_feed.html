@@ -1,0 +1,16 @@
+{% extends 'header.html' %}
+{% block title_block %}News Feed{% endblock %}
+{% block body_block %}
+<h1>News Feed</h1>
+{% if length2 == 0 %}
+    <h2>Either you are not following anyone or whom you're have'nt published any post yet</h2>
+{% else %}
+<ol>
+{% for news in post %}
+    <li><h3><a href="{% url 'socialMedia:complete_post' id=news.id %}">{{news.title}}</a></h3>
+        <h4>Published By=> {{news.author.user.username}} on  {{news.publish}}</h4>
+    </li>
+{% endfor %}
+</ol>
+{% endif %}
+{% endblock %}

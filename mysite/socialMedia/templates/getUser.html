@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+
+{% block body_block %}
+    <h1>This page contains information about {{user.username}}</h1>
+    <ul>
+        {% if user.profile.github_account_url or user.profile.facebook_account_url or user.profile.linkedIn_account_url %}
+
+            {% if user.profile.github_account_url %}
+            <li>
+                    <h4><a href="{{user.profile.github_account_url}}">Github Account</a></h4>
+            </li>
+            {% endif %}
+            {% if user.profile.facebook_account_url %}
+            <li>
+                    <h4><a href="{{user.profile.facebook_account_url}}">Facebook Account</a></h4>
+            </li>
+            {% endif %}
+            {% if user.profile.linkedIn_account_url %}
+            <li>
+                    <h4><a href="{{user.profile.linkedIn_account_url}}">LinkedIn Account</a></h4>
+            </li>
+            {% endif %}
+        {% else %}
+            <li>Following users hasn't provided any information about himself yet</li>
+        {% endif %}
+        </ul>
+    <h3>If you want see all the post published by him <a href="{% url 'socialMedia:seePubPost' id=user.id %}">Click Here</a></h3>
+{% endblock %}

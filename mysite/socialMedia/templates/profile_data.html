@@ -1,0 +1,18 @@
+{% extends 'header.html' %}
+{% block body_block %}
+<h1>Fill out this form to add more information about you</h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    Username:<input type="text" value="{{user.username}}" readonly>
+    <br>
+    <br>
+    {% if user.password %}
+    <p>Click for <a href="{% url 'socialMedia:password_change' %}">Password Change Form</a></p>
+    {% endif %}   
+    {{user_form.as_p}}
+    {{profile_form.as_p}}
+    <button>Submit</button>
+</form>
+{% endblock %}

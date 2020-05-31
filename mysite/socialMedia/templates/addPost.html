@@ -1,0 +1,11 @@
+{% extends 'header.html' %}
+
+{% block body_block %}
+<h1>Click here to create new Post</h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>Create Post</button>
+</form>
+{% endblock %}
